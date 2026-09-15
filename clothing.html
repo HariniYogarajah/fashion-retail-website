@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASHION RETAIL</title>
+    <style>
+        /* General Reset and Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            background-image: url('./colab.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 2rem 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .header-left {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-bar input {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 150px;
+        }
+
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #3498db;
+        }
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+            z-index: 3;
+            padding: 0.5rem;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #34495e;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #3498db;
+            transform: scale(1.1);
+        }
+
+        /* Container and Layout */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar h3 {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #34495e;
+            font-weight: 400;
+            margin: 0.8rem 0;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: #3498db;
+            padding-left: 0.5rem;
+        }
+
+        .sidebar input[type="range"] {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .main-content {
+            width: 80%;
+            padding: 1.5rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .sort-options {
+            margin-bottom: 1rem;
+        }
+
+        .sort-options select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        /* Product Styling */
+        .product {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product img {
+            max-width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1.5rem;
+            cursor: pointer;
+        }
+
+        .product-info h4 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            font-size: 1rem;
+            color: #555;
+            margin: 0.3rem 0;
+        }
+
+        .product-info .original-price {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            text-decoration: line-through;
+        }
+
+        .product-info button {
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        .product-info button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Universal Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90vw;
+            max-width: 400px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 40vh;
+            object-fit: contain;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .modal-text-content {
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .modal-content h4 {
+            font-size: clamp(16px, 4vw, 22px);
+            color: #2c3e50;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .modal-content p {
+            font-size: clamp(13px, 3vw, 16px);
+            color: #555;
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 15px;
+            font-size: clamp(14px, 3vw, 16px);
+            flex: 1;
+            min-height: 40px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+
+        @media screen and (max-height: 500px) {
+            .modal-content {
+                max-height: 95vh;
+                padding: 15px;
+            }
+            .modal-content img {
+                max-height: 30vh;
+            }
+        }
+
+        /* Cart Modal Specific Styling */
+        #cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item span {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Chatbot Styling */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .chatbot-icon:hover {
+            background-color: #2980b9;
+        }
+
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .chatbot-header {
+            background-color: #34495e;
+            color: white;
+            padding: 0.5rem;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h4 {
+            font-size: 1.2rem;
+        }
+
+        .chatbot-messages {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 1rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .chatbot-message {
+            margin-bottom: 0.5rem;
+        }
+
+        .chatbot-message.user {
+            text-align: right;
+            color: #3498db;
+        }
+
+        .chatbot-message.bot {
+            text-align: left;
+            color: #2c3e50;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 0.5rem;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ecf0f1;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .chatbot-input button {
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .chatbot-input button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar, .main-content {
+                width: 100%;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #34495e;
+                padding: 1rem;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            nav a {
+                margin: 0.5rem 0;
+                font-size: 1rem;
+            }
+
+            header .header-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .header-logo {
+                max-height: 100px;
+            }
+
+            .search-bar {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .product {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product img {
+                margin-bottom: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .chatbot-window {
+                width: 90%;
+                bottom: 60px;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <button>Search</button>
+            </div>
+            <div class="cart-icon">
+                <span>🛒</span>
+                <span>0</span>
+            </div> </div>
+        </div>
+        <div class="header-content">
+            <h1>The Style Vault</h1>
+            <p>Discover the Latest Trends in Apparel</p>
+        </div>
+        <div class="hamburger">☰</div>
+    </header>
+
+    <nav>
+        <a href="#mens">Men</a>
+        <a href="#womens">Women</a>
+        <a href="#kids">Kids</a>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Quick Links</h3>
+            <a href="#new-arrivals">New Arrivals</a>
+            <a href="#promotions">Promotions</a>
+            <a href="#filter">Filter by Price</a>
+            <div>
+                <label for="price-filter">Max Price: LKR 15,000</label>
+                <input type="range" id="price-filter" min="0" max="15000" value="15000">
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="section" id="new-arrivals">
+                <h2>New Arrivals</h2>
+                <div class="sort-options">
+                    <select>
+                        <option>Default</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product">
+                    <img src="./MWD.avif" alt="Men's Winter Jacket">
+                    <div class="product-info">
+                        <h4>Men's Winter Jacket</h4>
+                        <p>Description: Warm, stylish jacket perfect for cold weather. Made with high-quality wool and polyester blend.</p>
+                        <p>Price: LKR 12,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./WFD.avif" alt="Women's Floral Dress">
+                    <div class="product-info">
+                        <h4>Women's Floral Dress</h4>
+                        <p>Description: Elegant floral dress ideal for summer outings. Lightweight and breathable fabric.</p>
+                        <p>Price: LKR 10,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./KS.avif" alt="Kids' Sneakers">
+                    <div class="product-info">
+                        <h4>Kids' Sneakers</h4>
+                        <p>Description: Durable and comfortable sneakers for kids. Perfect for school or play.</p>
+                        <p>Price: LKR 8,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="promotions">
+                <h2>Promotions</h2>
+                <div class="sort-options">
+                    <select>
+                        <option>Default</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product">
+                    <img src="./KS.avif" alt="Kids' Sneakers (50% Off)">
+                    <div class="product-info">
+                        <h4>Kids' Sneakers (50% Off)</h4>
+                        <p>Description: Durable and comfortable sneakers for kids. Perfect for school or play.</p>
+                        <p>Price: LKR 4000 <span class="original-price">(Original: LKR 8,000)</span></p>
+                        <p>Availability: Limited Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./MCS.avif" alt="Men's Casual Shirt (Buy 1, Get 1 Free)">
+                    <div class="product-info">
+                        <h4>Men's Casual Shirt (Buy 1, Get 1 Free)</h4>
+                        <p>Description: Classic cotton shirt, available in multiple colors.</p>
+                        <p>Price: LKR 7,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./WKS.avif" alt="Women's Knit Sweater (20% Off)">
+                    <div class="product-info">
+                        <h4>Women's Knit Sweater (20% Off)</h4>
+                        <p>Description: Cozy sweater made from soft, breathable materials. Perfect for layering.</p>
+                        <p>Price: LKR 8,400 <span class="original-price">(Original: LKR 10,500)</span></p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="mens">
+                <h2>Men's Clothing</h2>
+                <div class="sort-options">
+                    <select>
+                        <option>Default</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product">
+                    <img src="./MSFJ.avif" alt="Men's Slim Fit Jeans">
+                    <div class="product-info">
+                        <h4>Men's Slim Fit Jeans</h4>
+                        <p>Description: Comfortable slim-fit jeans with a modern design. Available in blue and black.</p>
+                        <p>Price: LKR 9,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./MWD.avif" alt="Men's Winter Jacket">
+                    <div class="product-info">
+                        <h4>Men's Winter Jacket</h4>
+                        <p>Description: Warm, stylish jacket perfect for cold weather. Made with high-quality wool and polyester blend.</p>
+                        <p>Price: LKR 12,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./MCS.avif" alt="Men's Casual Shirt">
+                    <div class="product-info">
+                        <h4>Men's Casual Shirt</h4>
+                        <p>Description: Classic cotton shirt, available in multiple colors.</p>
+                        <p>Price: LKR 7,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="womens">
+                <h2>Women's Clothing</h2>
+                <div class="sort-options">
+                    <select>
+                        <option>Default</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product">
+                    <img src="./WKS.avif" alt="Women's Knit Sweater">
+                    <div class="product-info">
+                        <h4>Women's Knit Sweater</h4>
+                        <p>Description: Cozy sweater made from soft, breathable materials. Perfect for layering.</p>
+                        <p>Price: LKR 10,500</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./WFD.avif" alt="Women's Floral Dress">
+                    <div class="product-info">
+                        <h4>Women's Floral Dress</h4>
+                        <p>Description: Elegant floral dress ideal for summer outings. Lightweight and breathable fabric.</p>
+                        <p>Price: LKR 10,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./WDJ.avif" alt="Women's Denim Jacket">
+                    <div class="product-info">
+                        <h4>Women's Denim Jacket</h4>
+                        <p>Description: Trendy denim jacket with a relaxed fit. Perfect for casual wear.</p>
+                        <p>Price: LKR 13,500</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="kids">
+                <h2>Kids' Clothing</h2>
+                <div class="sort-options">
+                    <select>
+                        <option>Default</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="product">
+                    <img src="./KWPJ.avif" alt="Kids' Waterproof Jacket">
+                    <div class="product-info">
+                        <h4>Kids' Waterproof Jacket</h4>
+                        <p>Description: Lightweight, waterproof jacket for kids. Ideal for outdoor activities.</p>
+                        <p>Price: LKR 9,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./KS.avif" alt="Kids' Sneakers">
+                    <div class="product-info">
+                        <h4>Kids' Sneakers</h4>
+                        <p>Description: Durable and comfortable sneakers for kids. Perfect for school or play.</p>
+                        <p>Price: LKR 8,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="./KGS.avif" alt="Kids' Graphic Tee">
+                    <div class="product-info">
+                        <h4>Kids' Graphic Tee</h4>
+                        <p>Description: Fun and colorful graphic t-shirt for kids. Made from soft cotton.</p>
+                        <p>Price: LKR 5,000</p>
+                        <p>Availability: In Stock</p>
+                        <button>Add to Cart</button>
+                        <button>View Details</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <button class="close-button">×</button>
+            <img src="https://via.placeholder.com/150" alt="Product Image">
+            <div class="modal-text-content">
+                <h4>Product Name</h4>
+                <p>Description: </p>
+                <p>Price: </p>
+                <p>Availability: </p>
+                <div class="modal-buttons">
+                    <button>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <button class="close-button">×</button>
+            <h4>Your Cart</h4>
+            <div id="cart-items"></div>
+            <p>Total: LKR 0</p>
+            <button>Clear Cart</button>
+        </div>
+    </div>
+
+    <div class="chatbot-icon">💬</div>
+    <div class="chatbot-window">
+        <div class="chatbot-header">
+            <h4>Fashion Retail Assistant</h4>
+            <button class="close-button">×</button>
+        </div>
+        <div class="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type your message...">
+            <button>Send</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Fashion Retail. All rights reserved.</p>
+    </footer>
+</body>
+</html>
